@@ -1,0 +1,15 @@
+- name: Add docker repo
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE stable - $basearch
+    file: docker-ce
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    gpgcheck: yes
+
+- name: installing docker
+  yum:
+      name:
+        - docker-ce
+        - device-mapper-persistent-data
+        - lvm2
