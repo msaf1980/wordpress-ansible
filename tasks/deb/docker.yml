@@ -1,0 +1,18 @@
+- name: Add an Apt signing key from docker
+  apt_key:
+    data: "{{ lookup('url', 'https://download.docker.com/linux/debian/gpg', split_lines=False) }}"
+  environment:
+      http_proxy: http://192.168.0.190:3128
+      https_proxy: http://192.168.0.190:3128
+
+- apt_repository:
+    repo: deb https://download.docker.com/linux/debian $(lsb_release -cs) stable
+    state: present
+    filename: docker-ce
+
+- name: installing docker
+  apt:
+      name:
+        - python-pip
+        - docker-ce
+      update_cache: yes

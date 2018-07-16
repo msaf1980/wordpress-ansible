@@ -1,0 +1,11 @@
+- name: Build an image with nginx and php-fpm
+  hosts: Dockers
+  tasks:
+    - name: upload the site directory to the docker host
+      synchronize: src=../docker/php-fpm dest=/tmp
+    - name: build the image
+      docker_image: >
+        name=php-fpm
+        tag=0.2
+        path=/tmp/php-fpm
+        state=present

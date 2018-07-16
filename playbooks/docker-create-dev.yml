@@ -1,0 +1,11 @@
+- name: Create development containers
+  hosts: Dockers
+  tasks:
+    - name: mariadb container
+      docker_container:
+        name: mariadb-dev
+        image: mariadb:0.2
+    - name: php-fpm container
+      docker_container:
+        name: php-fpm-dev
+        image: php-fpm:0.2

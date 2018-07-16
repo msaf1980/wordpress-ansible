@@ -1,0 +1,16 @@
+- name: Start development containers
+  hosts: Dockers
+  tasks:
+    - name: mariadb container
+      docker_container:
+        name: mariadb-dev
+        image: mariadb:0.2
+        ports:
+          - "8807:3306"
+    - name: php-fpm container
+      docker_container:
+        name: php-fpm-dev
+        state: started
+        ports:
+          - "8881:80"
+          - "8823:22"

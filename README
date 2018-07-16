@@ -1,0 +1,8 @@
+ansible-playbook -i hosts playbooks/docker.yml
+
+ansible-playbook -i hosts playbooks/docker-php-fpm.yml
+ansible-playbook -i hosts playbooks/docker-mariadb.yml
+
+docker run -p 8881:80 -p 8823:22 -d php-fpm:0.2
+
+

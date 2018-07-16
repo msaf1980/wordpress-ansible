@@ -1,0 +1,24 @@
+# Docker install and config
+- hosts: Dockers
+  become: true
+  become_user: root
+  vars:
+    proxy_env:
+      http_proxy: http://192.168.0.190:3128
+      https_proxy: http://192.168.0.190:3128
+  tasks:
+    - block:
+      - include: ../tasks/deb/docker.yml
+      - include: ../tasks/docker-config.yml
+      when: ansible_os_family == "Debian"
+    - name: install latest version of pip
+      pip:
+        name: pip
+        state: latest
+    - name: install the version of docker-py used by ansible
+      pip: 
+        name:
+#          - requests
+#          - docker
+          - docker-py
+        extra_args: --user

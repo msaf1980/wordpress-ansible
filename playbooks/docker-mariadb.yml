@@ -1,0 +1,11 @@
+- name: Build an image with MariaDB
+  hosts: Dockers
+  tasks:
+    - name: upload the site directory to the docker host
+      synchronize: src=../docker/mariadb dest=/tmp
+    - name: build the image
+      docker_image: >
+        name=mariadb
+        tag=0.2
+        path=/tmp/mariadb
+        state=present
